@@ -1,0 +1,82 @@
+#-----------------------------------------------------------
+# Vivado v2018.3 (64-bit)
+# SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
+# IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+# Start of session at: Fri May 24 10:38:16 2019
+# Process ID: 7260
+# Current directory: C:/Users/darny/final_project
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent928 C:\Users\darny\final_project\final_project.xpr
+# Log file: C:/Users/darny/final_project/vivado.log
+# Journal file: C:/Users/darny/final_project\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/darny/final_project/final_project.xpr
+update_compile_order -fileset sources_1
+create_bd_design "design_1"
+update_compile_order -fileset sources_1
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:microblaze:11.0 microblaze_0
+endgroup
+startgroup
+apply_bd_automation -rule xilinx.com:bd_rule:microblaze -config { axi_intc {0} axi_periph {Enabled} cache {None} clk {New Clocking Wizard (100 MHz)} debug_module {Debug Only} ecc {None} local_mem {8KB} preset {None}}  [get_bd_cells microblaze_0]
+endgroup
+startgroup
+apply_bd_automation -rule xilinx.com:bd_rule:board -config { Manual_Source {Auto}}  [get_bd_intf_pins clk_wiz_1/CLK_IN1_D]
+apply_bd_automation -rule xilinx.com:bd_rule:board -config { Manual_Source {Auto} rst_polarity {ACTIVE_HIGH}}  [get_bd_pins clk_wiz_1/reset]
+apply_bd_automation -rule xilinx.com:bd_rule:board -config { Manual_Source {Auto} rst_polarity {ACTIVE_LOW}}  [get_bd_pins rst_clk_wiz_1_100M/ext_reset_in]
+endgroup
+regenerate_bd_layout
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 axi_interconnect_0
+endgroup
+set_property location {1 125 30} [get_bd_cells axi_interconnect_0]
+apply_bd_automation -rule xilinx.com:bd_rule:clkrst -config {Clk "/clk_wiz_1/clk_out1 (100 MHz)" }  [get_bd_pins axi_interconnect_0/ACLK]
+delete_bd_objs [get_bd_nets reset_rtl_0_0_1] [get_bd_nets rst_clk_wiz_1_100M_peripheral_aresetn] [get_bd_nets mdm_1_debug_sys_rst] [get_bd_nets clk_wiz_1_locked] [get_bd_nets rst_clk_wiz_1_100M_mb_reset] [get_bd_nets rst_clk_wiz_1_100M_bus_struct_reset] [get_bd_cells rst_clk_wiz_1_100M]
+delete_bd_objs [get_bd_intf_nets microblaze_0_dlmb_1] [get_bd_intf_nets microblaze_0_ilmb_1] [get_bd_intf_nets microblaze_0_debug] [get_bd_cells microblaze_0]
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:microblaze:11.0 microblaze_0
+endgroup
+apply_bd_automation -rule xilinx.com:bd_rule:microblaze -config { axi_intc {0} axi_periph {Enabled} cache {None} clk {/clk_wiz_1/clk_out1 (100 MHz)} debug_module {Debug Only} ecc {None} local_mem {64KB} preset {None}}  [get_bd_cells microblaze_0]
+delete_bd_objs [get_bd_cells mdm_1]
+delete_bd_objs [get_bd_cells microblaze_0_local_memory]
+delete_bd_objs [get_bd_cells microblaze_0]
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:microblaze:11.0 microblaze_0
+endgroup
+apply_bd_automation -rule xilinx.com:bd_rule:microblaze -config { axi_intc {0} axi_periph {Enabled} cache {None} clk {/clk_wiz_1/clk_out1 (100 MHz)} debug_module {Debug Only} ecc {None} local_mem {64KB} preset {None}}  [get_bd_cells microblaze_0]
+regenerate_bd_layout
+delete_bd_objs [get_bd_ports reset_rtl_0_0]
+startgroup
+set_property -dict [list CONFIG.C_S_AXI_ADDR_WIDTH {5} CONFIG.C_DBG_REG_ACCESS {1} CONFIG.C_DBG_MEM_ACCESS {0}] [get_bd_cells mdm_1]
+endgroup
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {/clk_wiz_1/clk_out1 (100 MHz)} Clk_slave {Auto} Clk_xbar {Auto} Master {/microblaze_0 (Periph)} Slave {/mdm_1/S_AXI} intc_ip {New AXI Interconnect} master_apm {0}}  [get_bd_intf_pins mdm_1/S_AXI]
+save_bd_design
+delete_bd_objs [get_bd_intf_nets microblaze_0_dlmb_1] [get_bd_intf_nets microblaze_0_ilmb_1] [get_bd_intf_nets microblaze_0_M_AXI_DP] [get_bd_intf_nets microblaze_0_debug] [get_bd_nets rst_clk_wiz_1_100M_mb_reset] [get_bd_cells microblaze_0]
+delete_bd_objs [get_bd_intf_nets microblaze_0_axi_periph_M00_AXI] [get_bd_nets mdm_1_debug_sys_rst] [get_bd_cells mdm_1]
+delete_bd_objs [get_bd_nets rst_clk_wiz_1_100M_bus_struct_reset] [get_bd_cells microblaze_0_local_memory]
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:microblaze:11.0 microblaze_0
+endgroup
+startgroup
+apply_bd_automation -rule xilinx.com:bd_rule:microblaze -config { axi_intc {0} axi_periph {Enabled} cache {None} clk {/clk_wiz_1/clk_out1 (100 MHz)} debug_module {Debug & UART} ecc {None} local_mem {64KB} preset {None}}  [get_bd_cells microblaze_0]
+endgroup
+startgroup
+set_property -dict [list CONFIG.PRIM_SOURCE {Single_ended_clock_capable_pin} CONFIG.USE_LOCKED {false} CONFIG.USE_RESET {false}] [get_bd_cells clk_wiz_1]
+delete_bd_objs [get_bd_nets clk_wiz_1_locked] [get_bd_intf_nets diff_clock_rtl_0_1]
+endgroup
+regenerate_bd_layout
+delete_bd_objs [get_bd_intf_ports diff_clock_rtl_0]
+apply_bd_automation -rule xilinx.com:bd_rule:board -config { Clk {New External Port (100 MHz)} Manual_Source {Auto}}  [get_bd_pins clk_wiz_1/clk_in1]
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 axi_gpio_0
+endgroup
+startgroup
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {/clk_wiz_1/clk_out1 (100 MHz)} Clk_slave {Auto} Clk_xbar {/clk_wiz_1/clk_out1 (100 MHz)} Master {/microblaze_0 (Periph)} Slave {/axi_gpio_0/S_AXI} intc_ip {/microblaze_0_axi_periph} master_apm {0}}  [get_bd_intf_pins axi_gpio_0/S_AXI]
+apply_bd_automation -rule xilinx.com:bd_rule:board -config { Manual_Source {Auto}}  [get_bd_intf_pins axi_gpio_0/GPIO]
+endgroup
+startgroup
+set_property -dict [list CONFIG.C_GPIO_WIDTH {22}] [get_bd_cells axi_gpio_0]
+endgroup
+save_bd_design
+regenerate_bd_layout
+save_bd_design
