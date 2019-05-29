@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "platform.h"
+#include "xparameters.h"
+#include "xgpio.h"
+
+XGpio GPIO_0;
+XGpio_Config GPIO_0_conf;
+unsigned int result, output;
+
+int main()
+{
+    GPIO_0_conf.BaseAddress = XPAR_AXI_GPIO_0_BASEADDR;
+    GPIO_0_conf.DeviceId = XPAR_GPIO_0_DEVICE_ID;
+    GPIO_0_conf.IsDual = XPAR_GPIO_0_IS_DUAL;
+
+    XGpio_CfgInitialize(&GPIO_0, &GPIO_0_conf, GPIO_0_conf.BaseAddress);
+
+    init_platform();
+    //for(int i=0; i<63; i++){
+    XGpio_DiscreteWrite(&GPIO_0, 1, 0x0);
+	print("Already wrote\n\r");
+	result = XGpio_DiscreteRead(&GPIO_0, 2);
+	print("Trying to read\n\r");
+	xil_printf("result: %x", result);
+
+    //}
+
+	print("Hello World\n\r");
+
+    cleanup_platform();
+    return 0;
+}
